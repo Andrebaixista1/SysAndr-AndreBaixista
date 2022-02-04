@@ -3,9 +3,11 @@ from time import sleep
 import os
 
 
-amarelo = '\033[33m'
-lilas = '\033[94m'
 
+lilas = '\033[94m'
+verde = '\033[32m'
+amarelo = '\033[33m'
+azul = '\033[34m'
 
 def LeiaInt(msg):
     while True:
@@ -22,13 +24,13 @@ def LeiaInt(msg):
             return n
 
 
-def linha(tam=100):
+def linha(tam=150):
     return '-' * tam
 
 
 def cabecalho(txt):
     print(linha())
-    print(txt.center(100))
+    print(txt.center(150))
     print(linha())
 
 
@@ -69,6 +71,7 @@ def BarCharge():
         txt = '  Loading...'
         print(f'{txt}{c}%', end='\r')
         sleep(0.001)
+    os.system('cls')
     print('SystemAnd - 2022 © Todos os direitos reservados.')
     sleep(1)
     print('Criado e Desenvolvido por: André Felipe Pinto')
@@ -142,3 +145,8 @@ def situacao(lista):
     opc = LeiaInt('Sua Opção: ')
     os.system('cls')
     return opc
+
+
+def MenuDeAparelhos():
+    print(f'{"Data":^20}{"Patrimônio":^15}{"Marca":^20}{azul}{"Modelo":^29}\033[m{"Cor":^30}{amarelo}{"Status":^20}\033[m{"Situação":^20}')
+    print(linha())

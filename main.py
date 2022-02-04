@@ -4,6 +4,11 @@ from time import sleep
 from lib.interface import *
 from lib.archive import *
 from datetime import datetime as dt
+import pyautogui as pg
+
+# Tela cheia
+pg.hotkey('winleft', 'up')
+
 os.system('cls')
 
 arq = 'BancoDeDados.txt'

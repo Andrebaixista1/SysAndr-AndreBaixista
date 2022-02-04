@@ -5,7 +5,7 @@ from lib.interface import *
 verde = '\033[32m'
 amarelo = '\033[33m'
 azul = '\033[34m'
-FundoBrancoLetraBranca = '\033[1;30;47m'
+vermelho = '\033[31m'
 
 
 def arquivoExiste(nome):
@@ -83,26 +83,32 @@ def cadastrar(arq, data='-', patrimônio='-', marca='-', modelo='-', cor='-', st
 
 
 def ProcurarPatrimonio(arq, patrimonio):
-    try:
-        a = open(arq, 'rt')
-    except:
-        print(f'Erro ao ler o arquivo {arq}!')
-    else:
-        # procurar patrimonios iguais e criar uma lista
-        lista = []
-        for linha in a:
-            dado = linha.split(';')
-            if dado[1] == patrimonio:
-                lista.append(dado)
-        cabecalho('Aparelhos encontrados')
-        print(
-            f'{"Data":^20}{"Patrimônio":^10}{"Marca":^10}{"Modelo":^10}{"Cor":>15}{"Status":^20}{"Situação":^20}')
-        for dado in lista:
-            dado[5] = dado[5].replace('\n', '')
-            print(
-                f'{dado[0]:<3}{dado[1]:^10}{dado[2]:^13}{azul}{dado[3]:<20}\033[m{dado[4]:<10}{amarelo}{dado[5]:<10}\033[m{dado[6]:^20}')
+        try:
+            a = open(arq, 'rt')
+        except:
+            print(f'Erro ao ler o arquivo {arq}!')
+        else:
+            # procurar patrimonios iguais e criar uma lista
+                    
+            lista = []
+            
+            for linha in a:
+                dado = linha.split(';')
+            # Repetir a perginta de patrimonio
+                # while True:
+            # Se encontrar o patrimonio na lista, mostrar os dados
 
-
+                if dado[1] == patrimonio:
+                    lista.append(dado)
+                    os.system('cls')
+                    cabecalho(f'{verde}Aparelhos encontrados\033[m')
+                    MenuDeAparelhos()
+                    for dado in lista:
+                        dado[6] = dado[6].replace('\n', '')
+                        print(
+                            f'{dado[0]:<3}{dado[1]:^10}{dado[2]:^13}{azul}{dado[3]:<20}\033[m{dado[4]:<10}{amarelo}{dado[5]:<10}\033[m{dado[6]:^20}')
+            
+ 
 def lerArquivo(nome):
     try:
         a = open(nome, 'rt')  # rt = read text
@@ -110,13 +116,12 @@ def lerArquivo(nome):
         print(f'Erro ao ler o arquivo {nome}!')
     else:
         cabecalho('Aparelhos cadastrados')
-        print(
-            f'{"Data":^20}{"Patrimônio":^10}{"Marca":^10}{"Modelo":^10}{"Cor":>30}{"Status":^20}{"Situação":<20}')
+        MenuDeAparelhos()
         for linha in a:
             dado = linha.split(';')
-            dado[5] = dado[5].replace('\n', '')
+            dado[6] = dado[6].replace('\n', '')
             print(
-                f'{dado[0]:<3}{dado[1]:^10}{dado[2]:^13}{azul}{dado[3]:<20}\033[m{dado[4]:>18}{amarelo}{dado[5]:>13}\033[m{dado[6]:>13}')    
+                f'{dado[0]}{dado[1]:>10}{dado[2]:>20}{azul}{dado[3]:^40}\033[m{dado[4]:>14}{amarelo}{dado[5]:>30}\033[m{dado[6]:>15}')    
         a.close()
 
 
