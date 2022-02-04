@@ -73,12 +73,14 @@ def cadastrar(arq, data='-', patrimônio='-', marca='-', modelo='-', cor='-', st
         print('Houve um erro na abertura do arquivo !')
     else:
         try:
+            
             a.write(
                 f'{data};{patrimônio};{marca};{modelo};{cor};{status};{situ}\n')
         except:
             print('Houve um erro na hora de escrever os dados !')
         else:
             print(f'Novo registro de {patrimônio} adicionado.')
+            
             a.close()
 
 

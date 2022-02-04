@@ -95,32 +95,42 @@ if not arquivoExiste(arq):
 while True:
     resp = menu(['Abrir Banco de Dados', 'Adicionar Item',
                 'Procurar Aparelho', 'Garantias', 'Sair'])
-
     if resp == 1:
         os.system('cls')
         lerArquivo(arq)
         os.system('pause')
         os.system('cls')
+
     elif resp == 2:
+        DataBase = list()
+        Arquivos = dict()
         os.system('cls')
         cabecalho('Cadastro de Aparelhos')
-        data = dt.now().strftime('%d/%m/%Y %H:%M:%S')
-        patrimônio = input('Digite o patrimônio do aparelho: ').upper()
-        marca = marca(marcaDB)
-        marca = marcaDB[marca - 1]
+        Arquivos['Data'] = dt.now().strftime('%d/%m/%Y %H:%M:%S')
+        Arquivos['patrimônio'] = input('Digite o patrimônio do aparelho: ').upper()
+        
 
-        modelo = modelo(modeloDB)
-        modelo = modeloDB[modelo - 1]
+        Arquivos['Marca'] = marca(marcaDB)
+        Arquivos['Marca'] = marcaDB[Arquivos['Marca'] - 1]
 
-        cor = cor(coresDB)
-        cor = coresDB[cor - 1]
+        Arquivos['Modelo'] = modelo(modeloDB)
+        Arquivos['Modelo'] = modeloDB[Arquivos['Modelo'] - 1]
 
-        status = status(statusDB)
-        status = statusDB[status - 1]
+        Arquivos['Cor'] = cor(coresDB)
+        Arquivos['Cor'] = coresDB[Arquivos['Cor'] - 1]
 
-        situ = situacao(EntSai)
-        situ = EntSai[situ - 1]
-        cadastrar(arq, data, patrimônio, marca, modelo, cor, status, situ)
+        Arquivos['Status'] = status(statusDB)
+        Arquivos['Status'] = statusDB[Arquivos['Status'] - 1]
+
+        Arquivos['Situação'] = situacao(EntSai)
+        Arquivos['Situação'] = EntSai[Arquivos['Situação'] - 1]
+
+        # print(Arquivos)
+        cadastrar(arq, Arquivos['Data'], Arquivos['patrimônio'], Arquivos['Marca'], Arquivos['Modelo'], Arquivos['Cor'], Arquivos['Status'], Arquivos['Situação'])
+        # cadastrar(arq, data, patrimônio, marca, modelo, cor, status, situ)
+        
+        
+
     elif resp == 3:
         os.system('cls')
         cabecalho('Procurar Aparelho')
@@ -134,6 +144,7 @@ while True:
         print(warranty)
         os.system('pause')
         os.system('cls')
+
     elif resp == 5:
         print('Obrigado por utilizar... Volte Sempre!')
         sleep(1)
@@ -141,6 +152,7 @@ while True:
 
         os.system('cls')
         break
+
     else:
         print('\033[31mERRO: Por favor, digite uma opção válida.\033[m')
         # os.system('pause')
